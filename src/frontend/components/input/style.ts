@@ -12,7 +12,7 @@ export const Input = styled.input`
 
     border-radius: 3px;
     outline: none;
-    border: 1px solid #ccc;
+    border: 1px solid ${props => props.theme.colors.greyLight4};
     transition: all .4s;
 
     &:focus {

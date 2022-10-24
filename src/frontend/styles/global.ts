@@ -11,7 +11,17 @@ export const GlobalStyle = createGlobalStyle`
 		font-size: 62.5%;
 		box-sizing: border-box;
 
+        @media only screen and (max-width: 100em) {
+            font-size: 56.25%; //1 rem = 9px, 9/16 = 56.25%
+        } //1600px
 
+        @media only screen and (max-width: 75em) {
+            font-size: 50%; //1 rem = 8px, 8/16 = 50%
+        } //1200px
+
+        @media only screen and (max-width: 37.5em) {
+            font-size: 43.75%; //1 rem = 7px, 7/16 = 43.75%
+        } //600px
 	}
 
     body {

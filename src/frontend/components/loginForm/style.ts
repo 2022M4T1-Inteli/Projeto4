@@ -5,7 +5,7 @@ export const Container = styled.div`
     height: 100%;
 `
 
-export const Box = styled.div`
+export const Form = styled.form`
     display: flex;
     grid-gap: 2rem;
     flex-direction: column;
@@ -14,5 +14,4 @@ export const Box = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-
 `
