@@ -10,10 +10,8 @@ function Mesh() {
     const myMesh = React.useRef<any>(null)
 
     useFrame(({ clock }) => {
-        console.log(clock.getElapsedTime())
-        // myMesh.current.rotation.x = clock.getElapsedTime() / 1.5
-        myMesh.current.rotation.y = clock.getElapsedTime()/ 1.6
-        myMesh.current.rotation.z = -clock.getElapsedTime() / 2
+
+        myMesh.current.rotation.z = -clock.getElapsedTime() / 4
     })
 
     return (
@@ -34,7 +32,7 @@ function InteliLogo() {
     return (
         <Suspense fallback={<div>loading...</div> /* or null */}>
             <primitive
-                scale={[4, 4, 4]}
+                scale={[8, 8, 8]}
                 ref={myMesh}
                 rotation={[0, -4.8, 0]}
                 object={gltf.scene}
@@ -52,6 +50,11 @@ const IptLogo: React.FC = () => {
             <pointLight position={[10, 0, 30]} intensity={1} />
             <pointLight position={[-10, 0, -30]} intensity={1} />
             <pointLight position={[10, 0, -30]} intensity={1} />
+
+            <pointLight position={[10, 30, 1]} intensity={0.5} />
+            <pointLight position={[-10, 30, 1]} intensity={0.5} />
+            <pointLight position={[10, -30, 1]} intensity={0.5} />
+            <pointLight position={[-10, -30, 1]} intensity={0.5} />
             <Mesh />
             <InteliLogo  />
         </Canvas>
