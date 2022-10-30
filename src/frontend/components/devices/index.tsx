@@ -1,65 +1,77 @@
 import React from 'react'
-import Input from '../input'
-import { Device, DevicesContainer } from './style'
-// import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import { DevicesContainer, EyeIcon } from './style'
+import { DataGrid, GridColDef, GridToolbarQuickFilter } from '@mui/x-data-grid'
+import Link from 'next/link'
 
-// const columns: GridColDef[] = [
-//     { field: 'id', headerName: 'ID', width: 70 },
-//     { field: 'firstName', headerName: 'First name', width: 130 },
-//     { field: 'lastName', headerName: 'Last name', width: 130 },
-//     {
-//       field: 'age',
-//       headerName: 'Age',
-//       type: 'number',
-//       width: 90,
-//     },
-//     {
-//       field: 'fullName',
-//       headerName: 'Full name',
-//       description: 'This column has a value getter and is not sortable.',
-//       sortable: false,
-//       width: 160,
-//       valueGetter: (params: GridValueGetterParams) =>
-//         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-//     },
-//   ];
+const columns: GridColDef[] = [
+    {
+        field: 'id',
+        headerName: 'Identificador',
+        flex: 0.2,
+        headerAlign: 'right',
+        align: 'right'
+    },
+    {
+        field: 'name',
+        headerName: 'Dispositivo',
+        flex: 0.2,
+        align: 'right',
+        headerAlign: 'right'
+    },
+    {
+        field: 'localization',
+        headerName: 'Última localização',
+        flex: 0.2,
+        align: 'right',
+        headerAlign: 'right'
+    },
+    {
+        field: 'actions',
+        headerName: 'Ações',
+        headerAlign: 'right',
+        align: 'right',
+        disableColumnMenu: true,
+        sortable: false,
+        flex: 0.4,
 
-// const rows = [
-//     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-//     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-//     { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-//     { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-//     { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-//     { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-//     { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-//     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-//     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
-// ]
+        renderCell: props => (
+            <Link href={'/devices/' + props.id}>
+                <EyeIcon />
+            </Link>
+        )
+    }
+]
+
+const rows = [
+    { id: 1, localization: 'Snow', name: 'Jon', age: 35 },
+    { id: 2, localization: 'Lannister', name: 'Cersei', age: 42 },
+    { id: 3, localization: 'Lannister', name: 'Jaime', age: 45 },
+    { id: 4, localization: 'Stark', name: 'Arya', age: 16 },
+    { id: 5, localization: 'Targaryen', name: 'Daenerys', age: null },
+    { id: 6, localization: 'Melisandre', name: null, age: 150 },
+    { id: 7, localization: 'Clifford', name: 'Ferrara', age: 44 },
+    { id: 8, localization: 'Frances', name: 'Rossini', age: 36 },
+    { id: 9, localization: 'Roxie', name: 'Harvey', age: 65 }
+]
 
 const Devices: React.FC = () => {
     return (
-        <>
-            <Input
-                placeholder="Pesquise por um dispositivo..."
-                name="searchDevices"
+        <DevicesContainer>
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                disableSelectionOnClick
+                components={{ Toolbar: GridToolbarQuickFilter }}
+                componentsProps={{
+                    toolbar: {
+                        showQuickFilter: true,
+                        quickFilterProps: { debounceMs: 500 }
+                    }
+                }}
             />
-
-            <DevicesContainer>
-                {/* <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
-                    checkboxSelection
-                /> */}
-                <Device>Microscópio: Laboratório 2 (Arduino #9042)</Device>
-                <Device>Microscópio: Laboratório 2 (Arduino #9042)</Device>
-                <Device>Microscópio: Laboratório 2 (Arduino #9042)</Device>
-                <Device>Microscópio: Laboratório 2 (Arduino #9042)</Device>
-                <Device>Microscópio: Laboratório 2 (Arduino #9042)</Device>
-                <Device>Microscópio: Laboratório 2 (Arduino #9042)</Device>
-            </DevicesContainer>
-        </>
+        </DevicesContainer>
     )
 }
 

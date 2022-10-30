@@ -4,7 +4,7 @@ export const theme = {
         black: '#000',
 
         primary: '#285CDC',
-        // primaryLight: '#00ffdd',
+        primaryLight: '#429cd4',
         primaryDark: '#00588E',
         greyLight1: '#faf9f9',
         greyLight2: '#f4f2f2',
@@ -25,4 +25,3 @@ export const theme = {
         borderRadius: '3px'
     }
 }
-

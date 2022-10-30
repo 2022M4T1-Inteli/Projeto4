@@ -127,7 +127,7 @@ const Home: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Dashboard</title>
+                <title>Admin</title>
             </Head>
             <Layout>
                 <Container>
@@ -135,11 +135,12 @@ const Home: NextPage = () => {
                         <Devices />
                     </Box>
 
-                    <Box title="Dispositivos conectados">
-                        <ConnectedDevices />
-                    </Box>
-                    <Box titleMarginBottom title="Últimas atualizações">
-                        <LastDevicesList devices={devices} />
+                    <Box
+                        titleMarginBottom
+                        title="Dispositivos conectados"
+                        style={{ gridColumn: '1/3' }}
+                    >
+                        a
                     </Box>
                 </Container>
             </Layout>

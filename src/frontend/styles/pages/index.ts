@@ -9,7 +9,7 @@ export const PageContainer = styled.div`
 export const Left = styled.div`
     flex: 0 1 50%;
     max-width: 50%;
-    background-color: ${props => props.theme.colors.primaryDark};
+    background: linear-gradient(to right bottom, ${props => props.theme.colors.primaryDark}, ${props => props.theme.colors.primary});
 `
 
 export const Right = styled.div`

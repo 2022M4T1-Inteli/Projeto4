@@ -18,7 +18,7 @@ const Sidebar: React.FC = () => {
                     <RiDashboardLine />
                 </Link>
             </Item>
-            <Item active={router.pathname == '/devices'}>
+            <Item active={router.pathname == '/admin'}>
                 <Link href={'/admin'}>
                     <MdOutlineAdminPanelSettings />
                 </Link>
