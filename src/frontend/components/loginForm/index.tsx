@@ -4,11 +4,12 @@ import { Form, Container } from './style'
 import { LoginBtn } from '../button'
 import Input from '../input'
 import { useForm } from 'react-hook-form'
+import Link from 'next/link'
 
 const LoginForm: React.FC = () => {
     const {
         register,
-        handleSubmit,
+        handleSubmit
         // formState: { errors }
     } = useForm()
 
@@ -28,7 +29,9 @@ const LoginForm: React.FC = () => {
                     label="Email"
                     name="email"
                 />
-                <LoginBtn type="submit">Entrar</LoginBtn>{' '}
+                <Link href="/dashboard">
+                    <LoginBtn type="submit">Entrar</LoginBtn>
+                </Link>
             </Form>
         </Container>
     )

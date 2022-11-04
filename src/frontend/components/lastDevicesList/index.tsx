@@ -13,11 +13,13 @@ const LastDevicesList: React.FC<Props> = ({ devices }) => {
             {devices.map(device => (
                 <Item key={device.id}>
                     <Badge>
-                        <Moment format='hh:mm - DD/MM/YYYY'>
-                            {device.localizations[
-                                device.localizations.length - 1
-                            ].time.toString()}
-                        </Moment>
+                        <p>
+                            <Moment format="hh:mm - DD/MM/YYYY">
+                                {device.localizations[
+                                    device.localizations.length - 1
+                                ].time.toString()}
+                            </Moment>
+                        </p>
                     </Badge>
                     <p>{device.name}</p>
                     <span>

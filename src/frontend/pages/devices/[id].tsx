@@ -14,6 +14,7 @@ import 'react-circular-progressbar/dist/styles.css'
 import { PlaySoundButton } from '@/components/button'
 import { GoLocation } from 'react-icons/go'
 import LastLocalizationsList from '@/components/lastLocalizationsList'
+import Map from '@/components/map'
 
 const device = {
     id: 2,
@@ -53,8 +54,8 @@ const Device: NextPage = () => {
                                 value={device.battery}
                                 text={`${device.battery}%`}
                                 styles={buildStyles({
-                                    pathColor: 'green',
-                                    textColor: 'green',
+                                    pathColor: '#285CDC',
+                                    textColor: '#285CDC',
                                     trailColor: '#d6d6d6'
                                 })}
                             />
@@ -92,6 +93,7 @@ const Device: NextPage = () => {
                         style={{ gridColumn: '1/4', gridRow: '2/-1' }}
                     >
                         Mapa
+                        {/* <Map /> */}
                     </Box>
                 </Container>
             </Layout>

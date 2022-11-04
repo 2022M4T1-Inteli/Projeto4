@@ -24,7 +24,9 @@ const Sidebar: React.FC = () => {
                 </Link>
             </Item>
             <Item style={{ marginTop: 'auto' }}>
-                <IoLogOutOutline style={{ marginLeft: '.5rem' }} />
+                <Link href="/login">
+                    <IoLogOutOutline style={{ marginLeft: '.5rem' }} />
+                </Link>
             </Item>
         </Container>
     )

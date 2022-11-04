@@ -137,10 +137,10 @@ const Home: NextPage = () => {
 
                     <Box
                         titleMarginBottom
-                        title="Dispositivos conectados"
+                        title="Mapa do IPT"
                         style={{ gridColumn: '1/3' }}
                     >
-                        a
+                        Mapa
                     </Box>
                 </Container>
             </Layout>
