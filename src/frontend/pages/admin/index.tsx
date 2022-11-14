@@ -9,6 +9,7 @@ import Devices from '@/components/devices'
 
 import ConnectedDevices from '@/components/connectedDevices'
 import LastDevicesList from '@/components/lastDevicesList'
+import { LazyMap } from '@/components/map/lazyMap'
 
 const devices: Device[] = [
     {
@@ -132,7 +133,7 @@ const Home: NextPage = () => {
             <Layout>
                 <Container>
                     <Box style={{ gridColumn: '1/3' }}>
-                        <Devices />
+                        <Devices admin />
                     </Box>
 
                     <Box
@@ -140,7 +141,7 @@ const Home: NextPage = () => {
                         title="Mapa do IPT"
                         style={{ gridColumn: '1/3' }}
                     >
-                        Mapa
+                        <LazyMap />
                     </Box>
                 </Container>
             </Layout>

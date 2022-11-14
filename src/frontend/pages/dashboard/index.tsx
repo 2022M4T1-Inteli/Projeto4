@@ -131,11 +131,11 @@ const Home: NextPage = () => {
             </Head>
             <Layout>
                 <Container>
-                    <Box style={{ gridColumn: '1/3' }}>
+                    <Box style={{ gridColumn: '1/3', gridRow: '1/2' }}>
                         <Devices />
                     </Box>
 
-                    <Box title="Dispositivos conectados">
+                    <Box title="Área dos dipositivos">
                         <ConnectedDevices />
                     </Box>
                     <Box titleMarginBottom title="Últimas atualizações">

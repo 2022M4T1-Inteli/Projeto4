@@ -14,7 +14,7 @@ import 'react-circular-progressbar/dist/styles.css'
 import { PlaySoundButton } from '@/components/button'
 import { GoLocation } from 'react-icons/go'
 import LastLocalizationsList from '@/components/lastLocalizationsList'
-import Map from '@/components/map'
+import { LazyMap } from '@/components/map/lazyMap'
 
 const device = {
     id: 2,
@@ -92,8 +92,7 @@ const Device: NextPage = () => {
                         title="Mapa"
                         style={{ gridColumn: '1/4', gridRow: '2/-1' }}
                     >
-                        Mapa
-                        {/* <Map /> */}
+                        <LazyMap />
                     </Box>
                 </Container>
             </Layout>

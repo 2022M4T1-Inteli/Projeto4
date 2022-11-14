@@ -10,6 +10,7 @@ import Router from 'next/router'
 import NProgress from 'nprogress' //nprogress module
 import 'nprogress/nprogress.css' //styles of nprogress
 import "styles/npstyle.css"
+import 'leaflet/dist/leaflet.css'
 
 //Binding events.
 Router.events.on('routeChangeStart', () => NProgress.start())

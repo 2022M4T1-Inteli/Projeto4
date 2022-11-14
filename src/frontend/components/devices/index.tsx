@@ -1,46 +1,7 @@
 import React from 'react'
-import { DevicesContainer, EyeIcon } from './style'
+import { DevicesContainer, EyeIcon, Trash, Edit } from './style'
 import { DataGrid, GridColDef, GridToolbarQuickFilter } from '@mui/x-data-grid'
 import Link from 'next/link'
-
-const columns: GridColDef[] = [
-    {
-        field: 'id',
-        headerName: 'Identificador',
-        flex: 0.2,
-        headerAlign: 'right',
-        align: 'right'
-    },
-    {
-        field: 'name',
-        headerName: 'Dispositivo',
-        flex: 0.2,
-        align: 'right',
-        headerAlign: 'right'
-    },
-    {
-        field: 'localization',
-        headerName: 'Última localização',
-        flex: 0.2,
-        align: 'right',
-        headerAlign: 'right'
-    },
-    {
-        field: 'actions',
-        headerName: 'Ações',
-        headerAlign: 'right',
-        align: 'right',
-        disableColumnMenu: true,
-        sortable: false,
-        flex: 0.4,
-
-        renderCell: props => (
-            <Link href={'/devices/' + props.id}>
-                <EyeIcon />
-            </Link>
-        )
-    }
-]
 
 const rows = [
     { id: 1, localization: 'Snow', name: 'Jon', age: 35 },
@@ -54,7 +15,71 @@ const rows = [
     { id: 9, localization: 'Roxie', name: 'Harvey', age: 65 }
 ]
 
-const Devices: React.FC = () => {
+interface Props {
+    admin?: boolean
+}
+
+const Devices: React.FC<Props> = ({ admin }) => {
+    const columns: GridColDef[] = [
+        {
+            field: 'id',
+            headerName: 'Identificador',
+            flex: 0.2,
+            headerAlign: 'left',
+            align: 'left'
+        },
+        {
+            field: 'name',
+            headerName: 'Dispositivo',
+            flex: 0.2,
+            align: 'left',
+            headerAlign: 'left'
+        },
+        {
+            field: 'localization',
+            headerName: 'Última localização',
+            flex: 0.2,
+            align: 'left',
+            headerAlign: 'left'
+        },
+        {
+            field: 'actions',
+            headerName: 'Ações',
+            headerAlign: 'center',
+            align: 'center',
+            disableColumnMenu: true,
+            sortable: false,
+            flex: 0.4,
+
+            renderCell: props => (
+                <>
+                    <Link href={'/devices/' + props.id}>
+                        <EyeIcon />
+                    </Link>
+                    {admin === true && <Trash />}
+                </>
+            )
+        }
+    ]
+
+    if (admin) {
+        columns.unshift({
+            field: 'edit',
+            headerName: 'Editar',
+            headerAlign: 'left',
+            align: 'left',
+            disableColumnMenu: true,
+            sortable: false,
+            flex: 0.4,
+
+            renderCell: props => (
+                <Link href={'/devices/edit/' + props.id}>
+                    {admin === true && <Edit />}
+                </Link>
+            )
+        })
+    }
+
     return (
         <DevicesContainer>
             <DataGrid

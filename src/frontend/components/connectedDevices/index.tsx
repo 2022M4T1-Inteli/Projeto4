@@ -37,7 +37,7 @@ const ConnectedDevices: React.FC = () => {
                 // maintainAspectRatio: false,
                 datasets: [
                     {
-                        label: 'Dispositivos não conectados',
+                        label: 'Dispositivos fora do campus',
                         data: [12, 19, 3, 5, 2, 3],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -58,7 +58,7 @@ const ConnectedDevices: React.FC = () => {
                         borderWidth: 1
                     },
                     {
-                        label: 'Dispositivos conectados',
+                        label: 'Dispositivos dentro do campus',
                         data: [30, 35, 6, 15, 12, 30],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
