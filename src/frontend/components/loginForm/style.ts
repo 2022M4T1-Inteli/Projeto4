@@ -3,6 +3,9 @@ import styled from 'styled-components'
 export const Container = styled.div`
     position: relative;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const Form = styled.form`

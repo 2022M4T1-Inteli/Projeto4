@@ -6,9 +6,21 @@ import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { IoLogOutOutline } from 'react-icons/io5'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import axios from '../../axios'
+import { toast } from 'react-toastify'
 
 const Sidebar: React.FC = () => {
     const router = useRouter()
+
+    const logoutHandler = async () => {
+        try {
+            await axios.post('/users/logout')
+            router.push('/login')
+            toast.success('Logout realizado com sucesso!')
+        } catch (err) {
+            router.push('/login')
+        }
+    }
 
     return (
         <Container>
@@ -24,9 +36,10 @@ const Sidebar: React.FC = () => {
                 </Link>
             </Item>
             <Item style={{ marginTop: 'auto' }}>
-                <Link href="/login">
-                    <IoLogOutOutline style={{ marginLeft: '.5rem' }} />
-                </Link>
+                <IoLogOutOutline
+                    onClick={logoutHandler}
+                    style={{ marginLeft: '.5rem' }}
+                />
             </Item>
         </Container>
     )

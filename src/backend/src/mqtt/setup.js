@@ -18,6 +18,7 @@ class MqttHandler {
             host: this.host,
             port: this.port,
             protocol: this.protocol,
+            reconnectPeriod: 5000 // Try reconnecting in 5 seconds if connection is lost
         })
 
         // Caso a conexão falhe
@@ -38,9 +39,7 @@ class MqttHandler {
         this.mqttClient.on('message', function (topic, message) {
             switch (topic) {
                 case '/location':
-                    console.log(message)
-                    console.log(message.toString())
-                    // location(JSON.parse(message))
+                    location(JSON.parse(message))
                     break
             }
         })

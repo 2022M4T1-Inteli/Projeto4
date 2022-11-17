@@ -30,4 +30,8 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme.colors.greyDark2};
         min-height: 100vh;
     }
+
+    .Toastify__toast-body {
+        font-size: 1.6rem !important;
+    }
 `

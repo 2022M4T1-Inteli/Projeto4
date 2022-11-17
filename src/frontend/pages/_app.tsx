@@ -9,8 +9,10 @@ import {
 import Router from 'next/router'
 import NProgress from 'nprogress' //nprogress module
 import 'nprogress/nprogress.css' //styles of nprogress
-import "styles/npstyle.css"
+import 'styles/npstyle.css'
 import 'leaflet/dist/leaflet.css'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 
 //Binding events.
 Router.events.on('routeChangeStart', () => NProgress.start())
@@ -45,6 +47,18 @@ function MyApp({ Component, pageProps }: AppProps) {
             <MuiThemeProvider theme={CustomFontTheme}>
                 <Component {...pageProps} />
                 <GlobalStyle />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
             </MuiThemeProvider>
         </ThemeProvider>
     )

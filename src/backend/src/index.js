@@ -9,11 +9,25 @@ require('./db/mongoose')()
 
 app.use(express.json())
 
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
+
+const cors = require('cors')
+app.use(
+    cors({
+        credentials: true,
+        origin: process.env.CLIENT_URL
+    })
+)
+
 var mqttClient = new mqttHandler();
 mqttClient.connect();
 
 const deviceRoutes = require("./routes/device")
 app.use(deviceRoutes)
+
+const userRoutes = require("./routes/user")
+app.use(userRoutes)
 
 // Routes
 app.get("/buzzer/:id", function(req, res) {
