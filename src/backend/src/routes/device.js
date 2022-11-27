@@ -46,7 +46,7 @@ router.get('/device/:id', authMiddleware, async (req, res) => {
 
 router.patch('/device/:id', authMiddleware, async (req,res) => {
     try{
-        const updateDevice = await Device.updateOne({_id: req.params.id})
+        const updateDevice = await Device.updateOne({_id: req.params.id}, {$set: {deviceId: req.body.deviceId, name: req.body.name}})
         const updatedDevice = new Device(updateDevice)
         await updatedDevice.save()
         res.send(updatedDevice)
