@@ -1,4 +1,3 @@
-import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyle } from 'styles/global'
 import { theme } from 'styles/theme'
@@ -19,7 +18,7 @@ Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }) {
     const CustomFontTheme = createTheme({
         typography: {
             fontSize: 24
@@ -43,24 +42,24 @@ function MyApp({ Component, pageProps }: AppProps) {
     })
 
     return (
-        <ThemeProvider theme={theme}>
-            <MuiThemeProvider theme={CustomFontTheme}>
-                <Component {...pageProps} />
-                <GlobalStyle />
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                />
-            </MuiThemeProvider>
-        </ThemeProvider>
+            <ThemeProvider theme={theme}>
+                <MuiThemeProvider theme={CustomFontTheme}>
+                    <Component {...pageProps} />
+                    <GlobalStyle />
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
+                </MuiThemeProvider>
+            </ThemeProvider>
     )
 }
 

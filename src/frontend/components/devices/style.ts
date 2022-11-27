@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { AiOutlineEye } from 'react-icons/ai'
 import { CiTrash } from 'react-icons/ci'
-import {TfiPencil} from 'react-icons/tfi'
+import { TfiPencil } from 'react-icons/tfi'
 export const DevicesContainer = styled.div`
     display: flex;
     height: 100%;
@@ -29,12 +29,20 @@ export const Trash = styled(CiTrash)`
     height: 2rem;
     cursor: pointer;
     transition: all 0.2s;
-    `
+
+    &:hover {
+        transform: scale(1.1);
+    }
+`
 
 export const Edit = styled(TfiPencil)`
-fill: black;
-width: 2rem;
-height: 2rem;
-cursor: pointer;
-transition: all 0.2s;
+    fill: #f5ce42;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 `

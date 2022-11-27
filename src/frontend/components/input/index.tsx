@@ -11,7 +11,6 @@ type InputProps = JSX.IntrinsicElements['input'] & Props
 
 const Input: React.FC<InputProps> = ({ register, name, label, error, ...rest }) => {
     const inputRef = useRef(null)
-    console.log(rest)
 
     return (
         <div>

@@ -21,14 +21,29 @@ const Scroll = css`
     }
 `
 
-export const Container = styled.div`
+interface ContainerProps {
+    noMinHeight?: boolean
+    noMaxHeight?: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
     padding: 2rem;
     box-shadow: 0px 4px 25px 10px rgba(204, 204, 204, 0.4);
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
+
     overflow: auto;
+
+    ${props =>
+        props.noMinHeight
+            ? `min-height: auto;`
+            : `min-height: calc(50vh - 5rem);`}
+${props =>
+        props.noMaxHeight
+            ? `max-height: auto;`
+            : `max-height: 50vh;`}
+
 
     ${Scroll}
 `

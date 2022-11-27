@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '@/components/layout'
-import type { NextPage } from 'next'
+import type { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
 import Box from '@/components/box'
 
@@ -8,123 +8,16 @@ import { Container } from '@/styles/pages/dashboard'
 import Devices from '@/components/devices'
 
 import ConnectedDevices from '@/components/connectedDevices'
-import LastDevicesList from '@/components/lastDevicesList'
+import LastDevicesList from '@/components/movementsList'
 import { LazyMap } from '@/components/map/lazyMap'
+import axios from '../../axios'
+import RequireAuthentication from '@/HOC/requireAuthentication'
 
-const devices: Device[] = [
-    {
-        id: 1,
-        name: 'Arduino #8943',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 1',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'Arduino #9436',
-        battery: 80,
-        localizations: [
-            {
-                room: 'Laboratório 2',
-                time: new Date()
-            }
-        ]
-    }
-]
+interface Props {
+    devices: Device[]
+}
 
-const Home: NextPage = () => {
+const Admin = ({ devices }: Props) => {
     return (
         <>
             <Head>
@@ -133,7 +26,7 @@ const Home: NextPage = () => {
             <Layout>
                 <Container>
                     <Box style={{ gridColumn: '1/3' }}>
-                        <Devices admin />
+                        <Devices devices={devices} admin />
                     </Box>
 
                     <Box
@@ -149,4 +42,16 @@ const Home: NextPage = () => {
     )
 }
 
-export default Home
+Admin.getInitialProps = async (ctx: NextPageContext, token: string) => {
+    const { data: devices } = await axios.get('/devices', {
+        headers: {
+            Cookie: `token=${token};`
+        }
+    })
+
+    return {
+        devices
+    }
+}
+
+export default RequireAuthentication(Admin)

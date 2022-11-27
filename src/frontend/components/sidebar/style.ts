@@ -1,19 +1,20 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    flex: 0 0 7.2rem;
     background: ${props => props.theme.colors.primary};
-    min-height: 100%;
+
     border-radius: 1rem;
     padding: 3rem 0;
+    position: fixed;
+    top: 4rem;
+    bottom: 4rem;
+    width: 7.2rem;
 
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     grid-gap: 2rem;
 
     text-align: center;
-    /* vertical-align: center; */
 
     box-shadow: 0px 0px 25px 4px #c0c0cb;
 `
