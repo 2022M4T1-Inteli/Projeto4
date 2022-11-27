@@ -1,11 +1,15 @@
-interface Localization {
+
+interface Location {
+    _id: string
     room: string
-    time: Date
+    deviceName?: string
+    createdAt: Date
+    updatedAt: Date
 }
 
 interface Device {
-    id: number
+    _id?: number
     name: string
-    battery: number
-    localizations: Localization[]
+    deviceId: string
+    locations: Location[]
 }

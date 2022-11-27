@@ -6,12 +6,23 @@ interface Props {
     children: React.ReactChild
     style?: React.CSSProperties
     titleMarginBottom?: boolean
+    noMinHeight?: boolean
+    noMaxHeight?: boolean
 }
 
-const Box: React.FC<Props> = ({ title, children, style, titleMarginBottom }) => {
+const Box: React.FC<Props> = ({
+    title,
+    children,
+    style,
+    titleMarginBottom,
+    noMinHeight,
+    noMaxHeight
+}) => {
     return (
-        <Container style={style}>
-            {title && <Title titleMarginBottom={titleMarginBottom}>{title}</Title>}
+        <Container noMaxHeight={noMaxHeight} noMinHeight={noMinHeight} style={style}>
+            {title && (
+                <Title titleMarginBottom={titleMarginBottom}>{title}</Title>
+            )}
             <Content>{children}</Content>
         </Container>
     )

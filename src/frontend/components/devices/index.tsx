@@ -17,12 +17,13 @@ const rows = [
 
 interface Props {
     admin?: boolean
+    devices: Device[]
 }
 
-const Devices: React.FC<Props> = ({ admin }) => {
+const Devices: React.FC<Props> = ({ admin, devices }) => {
     const columns: GridColDef[] = [
         {
-            field: 'id',
+            field: '_id',
             headerName: 'Identificador',
             flex: 0.2,
             headerAlign: 'left',
@@ -36,11 +37,14 @@ const Devices: React.FC<Props> = ({ admin }) => {
             headerAlign: 'left'
         },
         {
-            field: 'localization',
+            field: 'locations',
             headerName: 'Última localização',
             flex: 0.2,
             align: 'left',
-            headerAlign: 'left'
+            headerAlign: 'left',
+            renderCell: props => (
+                <div>Sala {props.value[props.value.length - 1].room}</div>
+            )
         },
         {
             field: 'actions',
@@ -49,7 +53,7 @@ const Devices: React.FC<Props> = ({ admin }) => {
             align: 'center',
             disableColumnMenu: true,
             sortable: false,
-            flex: 0.4,
+            flex: 0.1,
 
             renderCell: props => (
                 <>
@@ -70,7 +74,7 @@ const Devices: React.FC<Props> = ({ admin }) => {
             align: 'left',
             disableColumnMenu: true,
             sortable: false,
-            flex: 0.4,
+            flex: 0.1,
 
             renderCell: props => (
                 <Link href={'/devices/edit/' + props.id}>
@@ -83,7 +87,8 @@ const Devices: React.FC<Props> = ({ admin }) => {
     return (
         <DevicesContainer>
             <DataGrid
-                rows={rows}
+                rows={devices}
+                getRowId={row => row._id}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}

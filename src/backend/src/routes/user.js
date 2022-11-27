@@ -1,6 +1,6 @@
 const User = require("../models/user")
 const express = require('express')
-const { authMiddleware } = require("../middleware/auth")
+const { authMiddleware, adminMiddleware } = require("../middleware/auth")
 const router = express.Router()
 
 router.post('/users/login', async (req, res) => {
@@ -16,6 +16,7 @@ router.post('/users/login', async (req, res) => {
 
         const userResponse = user.toObject()
         delete userResponse.password
+        userResponse.token = token
 
         // Colocar token em Cookie
         res.cookie('token', token, {
@@ -47,6 +48,14 @@ router.post('/users/logout', authMiddleware, async (req, res) => {
     } catch (e) {
         res.status(500).send()
     }
+})
+
+router.get('/users/me', authMiddleware, async (req, res) => {
+    res.send(req.user)
+})
+
+router.get('/users/admin', adminMiddleware, async (req, res) => {
+    res.send(req.user)
 })
 
 module.exports = router

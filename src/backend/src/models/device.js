@@ -7,10 +7,15 @@ const deviceSchema = mongoose.Schema({
     },
     name: {
         type: String,
-        required: true
+        required: false
     }
 },  { timestamps: true })
 
+deviceSchema.virtual('locations', {
+    ref: 'Location',
+    localField: 'deviceId',
+    foreignField: 'deviceId'
+})
 
 const Device = mongoose.model('Device', deviceSchema)
 
