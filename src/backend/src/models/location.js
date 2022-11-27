@@ -6,17 +6,19 @@ const locationSchema = mongoose.Schema({
         required: true,
     },
     room: {
-        type: String,
+        type: Number,
         required: false
     },
-    signals: {
+    signals: [{
         macAddress: {
-            type: String
+            type: String,
+            required: true,
         },
         strength: {
-            type: Number
+            type: Number,
+            required: true,
         }
-    }
+    }]
 },  { timestamps: true })
 
 
