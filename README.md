@@ -9,10 +9,16 @@
 ## Nome do Grupo
 
 ## Integrantes: 
-
+* João Pedro Carazzato
+* Rafael Cabral
+* Lyorrei Quintão
+* Sophia Dias
+* Yves Levi
+* Cristiane Coutinho
 
 ## Descrição
-Descrição do projeto
+Como principal objetivo do desenvolvimento é permitir que qualquer pessoa, funcionária ou não do IPT, consiga localizar e utilizar a IoT, tanto o hardware quanto o software. Portanto, o localizador desenvolvido aos equipamentos do IPT devem fornecer a localização com o mínimo de erro possível, ser acessível para pessoas com deficiência visual ou auditiva e de fácil usabilidade.
+Em segundo plano, visando a funcionalidade do equipamento desenvolvido para o IPT, o dispositivo deve ter baixo custo de manutenção e, preferencialmente, sem atualizações necessárias, visando a diminuição de custos da empresa.
 
 ## 🛠 Estrutura de pastas
 
@@ -43,6 +49,8 @@ A cada atualização os detalhes devem ser lançados aqui.
 
 * 0.0.1 - 19/10/2022
     * Descrição
+* 0.0.2 - 19/11/2022
+    * Atualizações no README e Documentação da Sprint 3 adicionadas.
 
 
 ## 📋 Licença/License

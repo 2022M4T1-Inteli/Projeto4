@@ -53,20 +53,14 @@ router.get('/device/:id', authMiddleware, async (req, res) => {
     }
 })
 
-router.patch('/device/:id', authMiddleware, async (req,res) =>{
-    try {
-        const device = await Device.findOne({_id: req.params.id })
-
-        if (!device) {
-            throw new Error("Dispositivo não encontrado")
-        }
-        
-        await device.findOneAndUpdate()   
-        await device.save()
-
-        console.log("Registro de localização salvo no banco de dados.")
-    } catch (err) {
-        console.error("Erro ao salvar registro de localização no banco de dados.")
+router.patch('/device/:id', authMiddleware, async (req,res) => {
+    try{
+        const updateDevice = await Device.updateOne({_id: req.params.id}, {$set: {deviceId: req.body.deviceId, name: req.body.name}})
+        const updatedDevice = new Device(updateDevice)
+        await updatedDevice.save()
+        res.send(updatedDevice)
+    }catch{
+        res.status(500).send(err)
     }
 })
 
