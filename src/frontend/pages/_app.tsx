@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyle } from 'styles/global'
 import { theme } from 'styles/theme'
@@ -12,6 +13,11 @@ import 'styles/npstyle.css'
 import 'leaflet/dist/leaflet.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
+import withContexts from '@/HOC/withContexts'
+import { useEffect } from 'react'
+import axios from '../axios'
+import { useUser } from '@/context/User'
+import { ThemeOptions } from '@material-ui/core/styles/createTheme'
 
 //Binding events.
 Router.events.on('routeChangeStart', () => NProgress.start())
@@ -41,26 +47,35 @@ function MyApp({ Component, pageProps }) {
         }
     })
 
+    const { setUser } = useUser()
+
+    useEffect(() => {
+        axios
+            .get('/users/me')
+            .then(res => setUser(res.data))
+            .catch(e => {})
+    }, [setUser])
+
     return (
-            <ThemeProvider theme={theme}>
-                <MuiThemeProvider theme={CustomFontTheme}>
-                    <Component {...pageProps} />
-                    <GlobalStyle />
-                    <ToastContainer
-                        position="top-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="light"
-                    />
-                </MuiThemeProvider>
-            </ThemeProvider>
+        <ThemeProvider theme={theme}>
+            <MuiThemeProvider theme={CustomFontTheme}>
+                <Component {...pageProps} />
+                <GlobalStyle />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
+            </MuiThemeProvider>
+        </ThemeProvider>
     )
 }
 
-export default MyApp
+export default withContexts(MyApp)

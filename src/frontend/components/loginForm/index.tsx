@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import { Subtitle, Title } from '../title'
 import { Form, Container } from './style'
 import { LoginBtn } from '../button'
@@ -8,26 +8,26 @@ import axios from '../../axios'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import Spinner from '../spinner'
+import { useUser } from '@/context/User'
 
 const LoginForm: React.FC = () => {
     const router = useRouter()
+    const { setUser } = useUser()
     const {
         register,
         handleSubmit
-        // formState: {errors}
     } = useForm()
 
     const [loading, setLoading] = useState(false)
 
     const onSubmit = async data => {
-        console.log('data')
         setLoading(true)
-        console.log(data)
         try {
-            await axios.post('/users/login', data)
+            const { data: user } = await axios.post('/users/login', data)
+            setUser(user)
             router.push('/dashboard')
             toast.success('Login realizado com sucesso!')
-        } catch (err) {
+        } catch (err: any) {
             toast.error(err.response.data.error)
             setLoading(false)
         }

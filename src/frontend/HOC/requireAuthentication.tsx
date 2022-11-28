@@ -13,8 +13,6 @@ const RequireAuthentication = (WrappedComponent, isAdmin?: boolean) => {
                 token = tokenFromCookies
             }
 
-            console.log(token)
-
             try {
                 let user = null
                 if (isAdmin) {

@@ -9,7 +9,7 @@ interface Props {
 
 const MovementsList: React.FC<Props> = ({ locations }) => {
     let items = <Item>Sem atualizações</Item>
-
+    console.log(locations)
     if (locations.length > 0) {
         items = (
             <>

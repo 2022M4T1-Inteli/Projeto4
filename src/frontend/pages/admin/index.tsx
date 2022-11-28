@@ -54,4 +54,4 @@ Admin.getInitialProps = async (ctx: NextPageContext, token: string) => {
     }
 }
 
-export default RequireAuthentication(Admin)
+export default RequireAuthentication(Admin, true)

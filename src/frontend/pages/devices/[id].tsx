@@ -18,30 +18,6 @@ import { LazyMap } from '@/components/map/lazyMap'
 import axios from '../../axios'
 import RequireAuthentication from '@/HOC/requireAuthentication'
 
-// const device = {
-//     id: 2,
-//     name: 'Arduino #9436',
-//     battery: 80,
-//     locations: [
-//         {
-//             room: 'Laboratório 2',
-//             time: new Date()
-//         },
-//         {
-//             room: 'Laboratório 3',
-//             time: new Date()
-//         },
-//         {
-//             room: 'Laboratório 4',
-//             time: new Date()
-//         },
-//         {
-//             room: 'Laboratório 5',
-//             time: new Date()
-//         }
-//     ]
-// }
-
 interface Props {
     device: Device
     lastLocation: number
