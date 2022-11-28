@@ -29,11 +29,15 @@ router.get('/locations', authMiddleware, async (req, res) => {
     try {
         const locations = await Location.find({room: {$ne: null}}, {signals: 0}).sort({createdAt: -1}).limit(req.query.limit).exec()
 
+        const locationsList = []
         for (let i in locations) {
+            const location = locations[i].toObject()
+
             const device = await Device.findOne({ deviceId: locations[i].deviceId })
-            locations[i].deviceName = device.name
+            location.deviceName = device.name
+            locationsList.push(location)
         }
-        res.send(locations)
+        res.send(locationsList)
     } catch (err) {
         console.log(err)
         res.status(500).send(err)
@@ -54,12 +58,10 @@ router.get('/device/:id', authMiddleware, async (req, res) => {
 })
 
 router.patch('/device/:id', authMiddleware, async (req,res) => {
-    try{
-        const updateDevice = await Device.updateOne({_id: req.params.id}, {$set: {deviceId: req.body.deviceId, name: req.body.name}})
-        const updatedDevice = new Device(updateDevice)
-        await updatedDevice.save()
-        res.send(updatedDevice)
-    }catch{
+    try {
+        await Device.updateOne({_id: req.params.id}, { name: req.body.name})
+        res.send()
+    } catch (err) {
         res.status(500).send(err)
     }
 })
