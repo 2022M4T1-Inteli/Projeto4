@@ -6,7 +6,7 @@ import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { IoLogOutOutline } from 'react-icons/io5'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useUser } from '@/context/User'
+import { useUser } from '@/context/user'
 
 const Sidebar: React.FC = () => {
     const router = useRouter()

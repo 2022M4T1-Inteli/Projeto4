@@ -18,7 +18,7 @@ interface Props {
 const Devices: React.FC<Props> = ({ admin, devices: devicesFromProps }) => {
     const columns: GridColDef[] = [
         {
-            field: '_id',
+            field: 'deviceId',
             headerName: 'Identificador',
             flex: 0.2,
             headerAlign: 'left',

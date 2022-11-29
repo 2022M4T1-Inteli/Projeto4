@@ -1,14 +1,12 @@
 import React from 'react'
 import Layout from '@/components/layout'
-import type { NextPage, NextPageContext } from 'next'
+import type { NextPageContext } from 'next'
 import Head from 'next/head'
 import Box from '@/components/box'
 
 import { Container } from '@/styles/pages/dashboard'
 import Devices from '@/components/devices'
 
-import ConnectedDevices from '@/components/connectedDevices'
-import LastDevicesList from '@/components/movementsList'
 import { LazyMap } from '@/components/map/lazyMap'
 import axios from '../../axios'
 import RequireAuthentication from '@/HOC/requireAuthentication'

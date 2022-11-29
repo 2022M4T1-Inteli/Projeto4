@@ -8,7 +8,7 @@ import axios from '../../axios'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import Spinner from '../spinner'
-import { useUser } from '@/context/User'
+import { useUser } from '@/context/user'
 
 const LoginForm: React.FC = () => {
     const router = useRouter()

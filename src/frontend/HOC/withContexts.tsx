@@ -1,4 +1,4 @@
-import UserProvider from '@/context/User'
+import UserProvider from '@/context/user'
 import React from 'react'
 
 function withContexts(Component) {

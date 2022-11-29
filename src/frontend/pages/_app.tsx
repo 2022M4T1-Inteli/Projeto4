@@ -16,8 +16,7 @@ import { ToastContainer } from 'react-toastify'
 import withContexts from '@/HOC/withContexts'
 import { useEffect } from 'react'
 import axios from '../axios'
-import { useUser } from '@/context/User'
-import { ThemeOptions } from '@material-ui/core/styles/createTheme'
+import { useUser } from '@/context/user'
 
 //Binding events.
 Router.events.on('routeChangeStart', () => NProgress.start())
