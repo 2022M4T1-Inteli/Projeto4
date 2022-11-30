@@ -2,6 +2,7 @@ interface Location {
     _id: string
     room: string
     deviceName?: string
+    deviceId?: string
     createdAt: Date
     updatedAt: Date
 }

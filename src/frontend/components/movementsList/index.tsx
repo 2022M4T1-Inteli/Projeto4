@@ -5,30 +5,38 @@ import Moment from 'react-moment'
 
 interface Props {
     locations: Location[]
+    noDeviceName?: boolean
 }
 
-const MovementsList: React.FC<Props> = ({ locations }) => {
+const MovementsList: React.FC<Props> = ({ locations, noDeviceName }) => {
     let items = <Item>Sem atualizações</Item>
-    console.log(locations)
+
     if (locations.length > 0) {
         items = (
             <>
-                {locations.map(location => (
-                    <Item key={location._id}>
-                        <Badge>
-                            <p>
-                                <Moment format="hh:mm - DD/MM/YYYY">
-                                    {location.createdAt}
-                                    {/* {location.locations[
-                                        location.locations.length - 1
-                                    ].createdAt.toString()} */}
-                                </Moment>
-                            </p>
-                        </Badge>
-                        {location.deviceName && <p>{location.deviceName}</p>}
-                        <span>Sala {location.room}</span>
-                    </Item>
-                ))}
+                {locations.map(location =>
+                    location.room ? (
+                        <Item key={location._id}>
+                            <Badge>
+                                <p>
+                                    <Moment format="hh:mm - DD/MM/YYYY">
+                                        {location.createdAt}
+                                    </Moment>
+                                </p>
+                            </Badge>
+                            {!noDeviceName && (
+                                <p>
+                                    {location.deviceName
+                                        ? location.deviceName
+                                        : location.deviceId}
+                                </p>
+                            )}
+                            <span>Sala {location.room}</span>
+                        </Item>
+                    ) : (
+                        <Item>Nenhuma movimentação</Item>
+                    )
+                )}
             </>
         )
     }

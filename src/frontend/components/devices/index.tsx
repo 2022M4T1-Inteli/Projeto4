@@ -38,9 +38,21 @@ const Devices: React.FC<Props> = ({ admin, devices: devicesFromProps }) => {
             flex: 0.2,
             align: 'left',
             headerAlign: 'left',
-            renderCell: props => (
-                <div>Sala {props.value[props.value.length - 1].room}</div>
-            )
+            renderCell: props => {
+                let i = props.value.length
+                while (i > 0) {
+                    if (props.value[props.value.length - 1].room) {
+                        return (
+                            <div>
+                                Sala {props.value[props.value.length - 1].room}
+                            </div>
+                        )
+                    }
+                    i--
+                }
+
+                return <span>Nenhuma localização registrada</span>
+            }
         },
         {
             field: 'actions',

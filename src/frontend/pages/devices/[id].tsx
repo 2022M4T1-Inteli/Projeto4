@@ -26,12 +26,15 @@ interface Props {
 }
 
 const Device = ({ device, lastLocation, locations }: Props) => {
+    console.log(lastLocation)
     const handleBuzzer = async () => {
         try {
             await axios.get('/buzzer/' + device.deviceId)
-            toast.success("Solicitação de toque do dispositivo enviada com sucesso!")
+            toast.success(
+                'Solicitação de toque do dispositivo enviada com sucesso!'
+            )
         } catch (err) {
-            toast.error("Não foi possível tocar o som do dispositivo!")
+            toast.error('Não foi possível tocar o som do dispositivo!')
         }
     }
 
@@ -73,7 +76,11 @@ const Device = ({ device, lastLocation, locations }: Props) => {
                     >
                         <LocationContainer>
                             <GoLocation />
-                            <span>Sala {lastLocation}</span>
+                            {lastLocation ? (
+                                <span>Sala {lastLocation}</span>
+                            ) : (
+                                <span>Nenhuma localização registrada</span>
+                            )}
                         </LocationContainer>
                     </Box>
                     <Box
@@ -82,7 +89,7 @@ const Device = ({ device, lastLocation, locations }: Props) => {
                         title="Histórico de localizações"
                         style={{ gridColumn: '4/5', gridRow: '1/-1' }}
                     >
-                        <MovementsList locations={locations} />
+                        <MovementsList noDeviceName locations={locations} />
                     </Box>
                     <Box
                         noMaxHeight

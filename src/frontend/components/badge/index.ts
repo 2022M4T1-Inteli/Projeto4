@@ -8,6 +8,7 @@ export const Badge = styled.div`
     font-size: 1.4rem;
     font-weight: 500;
     color: ${props => props.theme.colors.white};
+    text-align: center;
 `
 
 export const InlineBadge = styled.div`
