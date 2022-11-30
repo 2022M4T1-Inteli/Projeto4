@@ -36,6 +36,7 @@ router.get('/locations', authMiddleware, async (req, res) => {
 
             const device = await Device.findOne({ deviceId: locations[i].deviceId })
             location.deviceName = device.name
+            location.deviceId = device.deviceId
             locationsList.push(location)
         }
         res.send(locationsList)
