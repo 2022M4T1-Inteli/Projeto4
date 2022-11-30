@@ -29,7 +29,8 @@ const Devices: React.FC<Props> = ({ admin, devices: devicesFromProps }) => {
             headerName: 'Dispositivo',
             flex: 0.2,
             align: 'left',
-            headerAlign: 'left'
+            headerAlign: 'left',
+            renderCell: props => <div>{props.value ? props.value : '-'}</div>
         },
         {
             field: 'locations',
