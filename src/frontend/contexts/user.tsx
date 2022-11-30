@@ -3,7 +3,6 @@ import React, {
     createContext,
     useState,
     useContext,
-    useEffect,
     SetStateAction,
     Dispatch
 } from 'react'
@@ -23,10 +22,14 @@ export default function UserProvider({ children }) {
     const Router = useRouter()
 
     const handleLogout = async (replaceLink: string) => {
-        await axios.post('/users/logout')
-        setUser(null)
-        Router.replace(replaceLink)
-        toast.success('Logout realizado com sucesso!')
+        try {
+            await axios.post('/users/logout')
+            setUser(null)
+            Router.replace(replaceLink)
+            toast.success('Logout realizado com sucesso!')
+        } catch (err) {
+            Router.replace(replaceLink)
+        }
     }
 
     return (

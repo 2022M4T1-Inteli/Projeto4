@@ -9,14 +9,23 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import Spinner from '../spinner'
 import { useUser } from '@/context/user'
+import * as yup from "yup";
+import { useYupValidationResolver } from 'hooks/yup'
+
+const validationSchema = yup.object({
+    email: yup.string().required('O email é obrigatório'),
+    password: yup.string().required('A senha é obrigatória'),
+})
 
 const LoginForm: React.FC = () => {
     const router = useRouter()
     const { setUser } = useUser()
+    const resolver = useYupValidationResolver(validationSchema)
     const {
         register,
-        handleSubmit
-    } = useForm()
+        handleSubmit,
+        formState: {errors}
+    } = useForm({resolver})
 
     const [loading, setLoading] = useState(false)
 
@@ -42,14 +51,14 @@ const LoginForm: React.FC = () => {
             </Subtitle>
             <Input
                 register={register}
-                // error={errors && errors.email.type}
+                error={errors.email?.message}
                 label="Email"
                 name="email"
                 type={'email'}
             />
             <Input
                 register={register}
-                // error={errors && errors.email.type}
+                error={errors.password?.message}
                 label="Senha"
                 name="password"
                 type={'password'}

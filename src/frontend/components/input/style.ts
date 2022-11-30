@@ -13,11 +13,28 @@ export const Input = styled.input`
     border-radius: 3px;
     outline: none;
     border: 1px solid ${props => props.theme.colors.greyLight4};
-    transition: all .4s;
+    transition: all 0.4s;
 
     &:focus {
         border: 1px solid ${props => props.theme.colors.primary};
+    }
+`
 
+export const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  grid-gap: 2rem;
+`;
+
+export const Checkbox = styled.input`
+    display: inline-block;
+
+    font-size: 1.6rem;
+
+    transition: all 0.4s;
+
+    &:focus {
+        border: 1px solid ${props => props.theme.colors.primary};
     }
 `
 
@@ -29,9 +46,13 @@ export const Label = styled.label`
     font-weight: 400;
 `
 
+export const CheckboxLabel = styled(Label)`
+    display: inline-block;
+`
+
 export const Error = styled.span`
     display: block !important;
     color: red !important;
-    margin-top: 1rem !important;
+    margin-top: 0.5rem !important;
     font-size: 1.4rem !important;
 `

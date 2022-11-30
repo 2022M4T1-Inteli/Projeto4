@@ -15,6 +15,7 @@ export const Button = styled.button`
     &:hover {
         transform: translateY(-0.1rem);
     }
+
 `
 
 export const LoginBtn = styled(Button)`
@@ -36,9 +37,16 @@ export const PlaySoundButton = styled(Button)`
     color: ${props => props.theme.colors.white};
     display: block;
     text-align: center;
-    box-shadow: 1rem 1.5rem 2.4rem rgba(0,0,0,.2);
+    box-shadow: 1rem 1.5rem 2.4rem rgba(0, 0, 0, 0.2);
 
     &:hover {
         transform: scale(1.03);
     }
+`
+
+export const CreateBtn = styled(Button)`
+    margin-bottom: 1rem;
+    background: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.white};
+    width: 20rem;
 `

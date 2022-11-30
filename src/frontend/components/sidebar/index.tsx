@@ -4,6 +4,7 @@ import { Container, Item, LogoContainer } from './style'
 import { RiDashboardLine } from 'react-icons/ri'
 import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { IoLogOutOutline } from 'react-icons/io5'
+import { FaUsersCog } from 'react-icons/fa'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useUser } from '@/context/user'
@@ -21,11 +22,18 @@ const Sidebar: React.FC = () => {
                 </Link>
             </Item>
             {user?.admin && (
+                <>
                 <Item active={router.pathname == '/admin'}>
                     <Link href={'/admin'}>
                         <MdOutlineAdminPanelSettings />
                     </Link>
                 </Item>
+                <Item active={router.pathname == '/users'}>
+                    <Link href={'/users'}>
+                        <FaUsersCog />
+                    </Link>
+                </Item>
+                </>
             )}
 
             <Item style={{ marginTop: 'auto' }}>
