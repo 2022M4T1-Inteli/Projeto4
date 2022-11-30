@@ -12,6 +12,7 @@ import axios from '../../axios'
 import { toast } from 'react-toastify'
 import ConfirmModal from '../confirmModal'
 import CreateUserModal from '../createUserModal'
+import { BlueInlineBadge, GreenInlineBadge } from '../badge'
 
 interface Props {
     users: User[]
@@ -46,6 +47,15 @@ const Users: React.FC<Props> = ({ users: usersFromProps }) => {
             flex: 0.2,
             align: 'left',
             headerAlign: 'left'
+        },
+        {
+            field: 'admin',
+            headerName: 'Cargo',
+            flex: 0.2,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: props =>
+                props.value ? <BlueInlineBadge>Admin</BlueInlineBadge> : <GreenInlineBadge>Usuário</GreenInlineBadge>
         },
         {
             field: 'actions',

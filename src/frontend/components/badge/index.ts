@@ -9,3 +9,20 @@ export const Badge = styled.div`
     font-weight: 500;
     color: ${props => props.theme.colors.white};
 `
+
+export const InlineBadge = styled.div`
+    padding: 0.6rem 1.4rem;
+    border-radius: ${props => props.theme.sizes.borderRadius};
+    display: inline-block;
+    font-size: 1.2rem;
+`
+
+export const BlueInlineBadge = styled(InlineBadge)`
+    color: ${props => props.theme.colors.white};
+    background: ${props => props.theme.colors.primary};
+`
+
+export const GreenInlineBadge = styled(InlineBadge)`
+    color: ${props => props.theme.colors.white};
+    background: green;
+`

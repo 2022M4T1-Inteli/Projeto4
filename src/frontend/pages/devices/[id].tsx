@@ -17,6 +17,7 @@ import MovementsList from '@/components/movementsList'
 import { LazyMap } from '@/components/map/lazyMap'
 import axios from '../../axios'
 import RequireAuthentication from '@/HOC/requireAuthentication'
+import { toast } from 'react-toastify'
 
 interface Props {
     device: Device
@@ -26,7 +27,12 @@ interface Props {
 
 const Device = ({ device, lastLocation, locations }: Props) => {
     const handleBuzzer = async () => {
-        await axios.get('/buzzer/' + device.deviceId)
+        try {
+            await axios.get('/buzzer/' + device.deviceId)
+            toast.success("Solicitação de toque do dispositivo enviada com sucesso!")
+        } catch (err) {
+            toast.error("Não foi possível tocar o som do dispositivo!")
+        }
     }
 
     return (
