@@ -1,5 +1,5 @@
 const express = require('express')
-const { authMiddleware } = require('../middleware/auth')
+const { authMiddleware, adminMiddleware} = require('../middleware/auth')
 const Device = require('../models/device')
 const Location = require('../models/location')
 const router = express.Router()
@@ -21,6 +21,7 @@ router.get('/devices', authMiddleware, async (req, res) => {
 
         res.send(devicesList)
     } catch (err) {
+        console.log(err)
         res.status(500).send(err)
     }
 })

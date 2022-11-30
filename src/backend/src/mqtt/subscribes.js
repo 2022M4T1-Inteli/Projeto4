@@ -4,7 +4,7 @@ const Device = require("../models/device")
 const location = async (locationData) => {
     try {
         const location = new Location(locationData)
-        console.log(location)
+       
         await location.save()
 
         const deviceExists = await Device.findOne({deviceId: locationData.deviceId })
