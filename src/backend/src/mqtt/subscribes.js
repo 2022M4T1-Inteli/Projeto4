@@ -4,6 +4,7 @@ const Device = require("../models/device")
 const location = async (locationData) => {
     try {
         const location = new Location(locationData)
+        console.log(location)
         await location.save()
 
         const deviceExists = await Device.findOne({deviceId: locationData.deviceId })
@@ -16,6 +17,7 @@ const location = async (locationData) => {
         console.log("Registro de localização salvo no banco de dados.")
     } catch (err) {
         console.error("Erro ao salvar registro de localização no banco de dados.")
+        console.log(err)
     }
  
 }

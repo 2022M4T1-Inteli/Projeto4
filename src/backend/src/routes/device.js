@@ -66,5 +66,16 @@ router.patch('/device/:id', authMiddleware, async (req,res) => {
     }
 })
 
+router.delete('/device/:id', adminMiddleware, async (req,res) => {
+    try {
+        const recordDevice = await Device.findById(req.params.id) 
+        await Location.deleteMany({deviceId: recordDevice.deviceId})
+        await Device.deleteOne({_id: req.params.id})
+        res.send()
+    }catch (err){
+        res.status(500).send(err)
+    }
+})
+
 
 module.exports = router

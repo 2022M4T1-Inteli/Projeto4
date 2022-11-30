@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const mqttHandler = require('./mqtt/setup')
 
-require('./db/mongoose')()
+require('./db/mongoose')
 
 app.use(express.json())
 
