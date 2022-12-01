@@ -18,7 +18,11 @@ const locationSchema = mongoose.Schema({
             type: Number,
             required: true,
         }
-    }]
+    }],
+    battery: {
+        type: Number,
+        required: true
+    }
 },  { timestamps: true })
 
 
