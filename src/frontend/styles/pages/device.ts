@@ -42,3 +42,8 @@ export const LocationContainer = styled.div`
         fill: ${props => props.theme.colors.primary};
     }
 `
+
+export const NoBatteryInfo = styled.p`
+  font-size: 1.8rem;
+  text-align: center;
+`;

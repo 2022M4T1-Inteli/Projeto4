@@ -50,9 +50,10 @@ router.get('/device/:id', authMiddleware, async (req, res) => {
     try {
         const device = await Device.findOne({ _id: req.params.id })
         const locations = await Location.find({ deviceId: device.deviceId }, {signals: 0}).sort({createdAt: -1}).exec()
-        const lastLocation = locations[locations.length - 1].room
-
-        res.send({ locations, device, lastLocation })
+        const lastLocation = locations[0].room
+        const battery = locations[0].battery
+        console.log(locations[0])
+        res.send({ locations, device, battery, lastLocation })
     } catch (err) {
         console.log(err)
         res.status(500).send(err)

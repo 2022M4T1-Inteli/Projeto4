@@ -7,6 +7,7 @@ import {
     BatteryBoxContainer,
     Container,
     LocationContainer,
+    NoBatteryInfo,
     PlaySoundContainer
 } from '@/styles/pages/device'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
@@ -22,11 +23,11 @@ import { toast } from 'react-toastify'
 interface Props {
     device: Device
     lastLocation: number
+    battery: number
     locations: Location[]
 }
 
-const Device = ({ device, lastLocation, locations }: Props) => {
-    console.log(lastLocation)
+const Device = ({ device, lastLocation, battery, locations }: Props) => {
     const handleBuzzer = async () => {
         try {
             await axios.get('/buzzer/' + device.deviceId)
@@ -47,15 +48,21 @@ const Device = ({ device, lastLocation, locations }: Props) => {
                 <Container>
                     <Box noMinHeight titleMarginBottom title="Nível da bateria">
                         <BatteryBoxContainer>
-                            <CircularProgressbar
-                                value={80}
-                                text={`80%`}
-                                styles={buildStyles({
-                                    pathColor: '#285CDC',
-                                    textColor: '#285CDC',
-                                    trailColor: '#d6d6d6'
-                                })}
-                            />
+                            {battery ? (
+                                <CircularProgressbar
+                                    value={battery}
+                                    text={battery + `%`}
+                                    styles={buildStyles({
+                                        pathColor: '#285CDC',
+                                        textColor: '#285CDC',
+                                        trailColor: '#d6d6d6'
+                                    })}
+                                />
+                            ) : (
+                                <NoBatteryInfo>
+                                    Sem informações da bateria
+                                </NoBatteryInfo>
+                            )}
                         </BatteryBoxContainer>
                     </Box>
                     <Box
@@ -115,6 +122,7 @@ Device.getInitialProps = async (context: NextPageContext, token: string) => {
     return {
         device: data.device,
         lastLocation: data.lastLocation,
+        battery: data.battery,
         locations: data.locations
         // will be passed to the page component as props
     }
