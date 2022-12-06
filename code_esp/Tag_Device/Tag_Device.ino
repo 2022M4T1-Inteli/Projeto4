@@ -67,6 +67,10 @@ void search() {
   };
 }
 
+buzzer(){
+  tone(BUZZER, 1500, 2000);
+}
+
 //Definições iniciais do ESP32-S3
 void setup() {
   Serial.begin(115200);
