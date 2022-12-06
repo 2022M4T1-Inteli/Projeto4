@@ -3,22 +3,27 @@
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
 #define BUZZER 35
-#define BUTTOM_SCAN 38
-#define BUTTOM_BUZZER 5
 #define redLED 16
 #define greenLED 15
 
+//Configurações do Broker
 WiFiClientSecure wifiClient;
 PubSubClient mqttClient(wifiClient);
-const char* ssid = "Rafael";
-const char* password = "SemSenha";
+
+//Conexões WiFi e link da nuvem para acesso ao Broker
+const char* ssid = "Inteli-COLLEGE";
+const char* password = "QazWsx@123";
 char* mqttServer = "31632e1a776b4e068513a22883b3537b.s1.eu.hivemq.cloud";
 int mqttPort = 8883;
+
+//Função que acessa o Broker
 void setupMQTT() {
   wifiClient.setInsecure();
   mqttClient.setServer(mqttServer, mqttPort);
   mqttClient.setCallback(callback);
 }
+
+//Função para reconectar ao Broker com os dados de Login
 void reconnect() {
   digitalWrite(redLED, HIGH);
   Serial.println("Connecting to MQTT Broker...");
@@ -28,14 +33,13 @@ void reconnect() {
     delay(2000);
     if (mqttClient.connect(clientId.c_str(), "Inteli-iot", "NDD7_@hNgHY2vRN")) {
       Serial.println("Connected.");
-      // subscribe to topic
-      mqttClient.subscribe("esp32/message");
     }
   }
 }
+
+//Função para buncar todas as redes WiFi por perto e retornar o Macaddress e a potência do sinal
 void search() {
   Serial.println("scan start");
-  // WiFi.scanNetworks will return the number of networks found
   int n = WiFi.scanNetworks();
   Serial.println("scan done");
   if (n == 0) {
@@ -63,20 +67,10 @@ void search() {
   };
 }
 
-void buzzer() {
-
-  while (digitalRead(BUTTOM_BUZZER) == HIGH) {
-
-    tone(BUZZER, 1000, 100);
-  }
-}
-
-
+//Definições iniciais do ESP32-S3
 void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, password);
-  pinMode(BUTTOM_SCAN, INPUT_PULLUP);
-  pinMode(BUTTOM_BUZZER, INPUT_PULLUP);
   pinMode(redLED, OUTPUT);
   pinMode(greenLED, OUTPUT);
   pinMode(BUZZER, OUTPUT);
@@ -88,7 +82,10 @@ void setup() {
   Serial.println("Connected to Wi-Fi");
   setupMQTT();
 }
-void loop() { 
+
+//Função que chama todas as outras em um loop
+void loop() {
+  //mantém a conexão WiFi
   if (!mqttClient.connected()) {
     digitalWrite(redLED, HIGH);
     reconnect();
@@ -97,19 +94,18 @@ void loop() {
   digitalWrite(redLED, LOW);
   digitalWrite(greenLED, HIGH);
 
+  //Conecta ao Broker
   mqttClient.loop();
   long now = millis();
   long previous_time = 0;
-  if (digitalRead(BUTTOM_SCAN) == LOW) {
-    String rede = WiFi.macAddress();
-    search();
-  }
-  if (digitalRead(BUTTOM_BUZZER) == LOW) {
-    tone(BUZZER, 0);
-    while (digitalRead(BUTTOM_BUZZER) == LOW)
-      ;
-  }
+
+  String rede = WiFi.macAddress();
+  search();
+  delay(1.800.000);
+  
 }
+
+//Função que verifica no server se há uma função a ser executada
 void callback(char* topic, byte* message, unsigned int length) {
   Serial.print("Callback - ");
   Serial.print("Message:");
