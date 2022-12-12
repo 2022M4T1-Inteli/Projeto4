@@ -41,7 +41,7 @@ void reconnect() {
 void search() {
 
   int value = analogRead(1);
-  float voltage = value * (5.00 / 1023.00) * 2;
+  float voltage = 60;
 
   Serial.println("scan start");
   int n = WiFi.scanNetworks();
@@ -84,7 +84,7 @@ void setup() {
   pinMode(greenLED, OUTPUT);
   pinMode(BUZZER, OUTPUT);
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+    delay(5000);
     Serial.print(".");
   }
   Serial.println("");
@@ -95,6 +95,10 @@ void loop() {
   if (!mqttClient.connected()) {
     digitalWrite(redLED, HIGH);
     reconnect();
+    delay(5000);
+    if(!mqttClient.connected()){
+      ESP.restart();
+    }
   }
 
   digitalWrite(redLED, LOW);
@@ -104,11 +108,12 @@ void loop() {
   long now = millis();
   long previous_time = 0;
 
-  String rede = WiFi.macAddress();
-  search();
-  delay(1.800.000);
-  
+  if (digitalRead(BUTTOM_SCAN) == LOW) {
+    String rede = WiFi.macAddress();
+    search();
+  }
 }
+
 void callback(char* topic, byte* message, unsigned int length) {
   String mac = WiFi.macAddress();
   String topicoESP = "/buzzer/" + mac;

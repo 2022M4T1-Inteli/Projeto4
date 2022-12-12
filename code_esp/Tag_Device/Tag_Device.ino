@@ -30,11 +30,18 @@ void reconnect() {
   Serial.println("Connecting to MQTT Broker...");
   while (!mqttClient.connected()) {
     Serial.println("Reconnecting to MQTT Broker..");
-    String clientId = "ESP32Client-";
-    delay(2000);
+    String clientId = WiFi.macAddress();
+  
+
+    
     if (mqttClient.connect(clientId.c_str(), "Inteli-iot", "NDD7_@hNgHY2vRN")) {
+      String mac = WiFi.macAddress();
+      String topicoESP = "/buzzer/" + mac;
+      const char * c = topicoESP.c_str();
+      mqttClient.subscribe(c);
       Serial.println("Connected.");
     }
+        delay(10000);
   }
 }
 
@@ -95,6 +102,9 @@ void loop() {
   if (!mqttClient.connected()) {
     digitalWrite(redLED, HIGH);
     reconnect();
+    if (!mqttClient.connected()) {
+      ESP.restart();
+    }
   }
 
   digitalWrite(redLED, LOW);
@@ -105,11 +115,11 @@ void loop() {
   long previous_time = 0;
 
   String rede = WiFi.macAddress();
-  search();
-  delay(1.800.000);
-  
+  //search();
+ // delay(1800000);
 }
 void callback(char* topic, byte* message, unsigned int length) {
+  Serial.println(topic);
   String mac = WiFi.macAddress();
   String topicoESP = "/buzzer/" + mac;
   String topicStr = topic;
@@ -124,4 +134,4 @@ void callback(char* topic, byte* message, unsigned int length) {
   for (int i = 0; i < length; i++) {
     Serial.print((char)message[i]);
   }
-}
+} 
