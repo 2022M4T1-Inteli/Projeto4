@@ -130,12 +130,12 @@ void loop() {
 }
 
 
-// Funcao de callback caso tenha algum erro.
+// Funcao de callback para sempre sabermos o que ocorre no servidor.
 void callback(char* topic, byte* message, unsigned int length) {
   String mac = WiFi.macAddress();
   String topicoESP = "/buzzer/" + mac;
   String topicStr = topic;
-  if (topicStr == topicoESP) {
+  if (topicStr == topicoESP) { // Se a requisicao recebida de tocar um som tiver o mesmo endereco mac do que o ESP, o buzzer toca
     buzzer(); // Toca o buzzer quando isso acontece.
   }
 
