@@ -38,10 +38,22 @@ Dentre os arquivos presentes na raiz do projeto, definem-se:
 
 **src**: nesta pasta encontra-se todo o código fonte dos embarcados, front-end e back-end.
 
+***.env***: módulo de dependência zero que carrega variáveis de ambiente de um .env arquivo em process.env.
+
 ## 💻 Configuração para Desenvolvimento
 
-Se aplicável, descreva instruções para configuração do ambiente para desenvolvimento (frontend e/ou backend)
+### .env Frontend
+   * JWT_SECRET // variável que armazena um web token para a aplicação
+   * NEXT_PUBLIC_APP_URL // variável que armazena a url local da aplicação no frontend
 
+### .env Backend
+   * CLIENT_URL // variável que armazena a url local da aplicação no backend
+   * NODE_ENV // variável que armazena o ambiente de desenvolvimento, podendo ser "development" ou "production"
+   * DB_URL // variável que seleciona a conexão com o MongoDB.
+   * JWT_SECRET // variável que armazena um web token para a aplicação
+   * MQTT_USERNAME // variável com o user para conexão com o protocolo MQTT 
+   * MQTT_PASSWORD // variável com a senha para conexão com o protocolo MQTT
+   * MQTT_HOST // variável que seleciona o host de qual serviço de MQTT o projeto irá utilizar
 
 ## 🗃 Histórico de lançamentos
 
@@ -51,7 +63,8 @@ A cada atualização os detalhes devem ser lançados aqui.
     * Descrição
 * 0.0.2 - 19/11/2022
     * Atualizações no README e Documentação da Sprint 3 adicionadas.
-
+* 0.0.3 - 14/12/2022
+    * Inserção de novo arquivo na raíz do projeto.
 
 ## 📋 Licença/License
 
