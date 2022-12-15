@@ -62,7 +62,7 @@ void search() {
     Serial.println("vezes: " + n);
     signalsInfo += "]";
     String rede = WiFi.macAddress();
-    String payload = "{\"deviceId\": \"" + rede + "\", \"signals\": " + signalsInfo + "," + "\"room\": 7, \"battery\": " + voltage + "}";
+    String payload = "{\"deviceId\": \"" + rede + "\", \"signals\": " + signalsInfo + "," + "\"room\": \"05/03/01\", \"battery\": " + voltage + "}";
     int tamanho = payload.length();
     mqttClient.beginPublish("/location", tamanho, false);
     mqttClient.print(payload);
