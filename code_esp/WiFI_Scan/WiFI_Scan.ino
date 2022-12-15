@@ -48,7 +48,7 @@ void reconnect() {
 void search() {
 
   int value = analogRead(1); // Pegamos a porcentagem da bateria do ESP
-  float voltage = 60;
+  float voltage = value*(5.00/1023.00)*2; // Conta para recebermos a porcentagem de bateria correta
 
   Serial.println("scan start");
   int n = WiFi.scanNetworks(); //Fazendo a busca por redes
