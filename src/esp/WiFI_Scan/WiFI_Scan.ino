@@ -139,11 +139,4 @@ void callback(char* topic, byte* message, unsigned int length) {
     buzzer(); // Toca o buzzer quando isso acontece.
   }
 
-  Serial.println("topic: " + *topic);
-  Serial.println("topic: " + topicoESP);
-  Serial.print("Callback - ");
-  Serial.print("Message:");
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)message[i]);
-  }
 }
