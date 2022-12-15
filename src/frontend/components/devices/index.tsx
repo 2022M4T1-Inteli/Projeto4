@@ -1,6 +1,11 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { DevicesContainer, EyeIcon, Trash, Edit, EditName, Form } from './style'
-import { DataGrid, GridColDef, GridToolbarQuickFilter } from '@mui/x-data-grid'
+import {
+    DataGrid,
+    GridColDef,
+    GridRowId,
+    GridToolbarQuickFilter
+} from '@mui/x-data-grid'
 import Link from 'next/link'
 import Modal from '../modal'
 import Input from '../input'
@@ -9,6 +14,8 @@ import { useForm } from 'react-hook-form'
 import axios from '../../axios'
 import { toast } from 'react-toastify'
 import Spinner from '../spinner'
+import { convertRoom } from 'utils/room'
+import ConfirmModal from '../confirmModal'
 
 interface Props {
     admin?: boolean
@@ -44,7 +51,9 @@ const Devices: React.FC<Props> = ({ admin, devices: devicesFromProps }) => {
                     if (props.value[props.value.length - 1].room) {
                         return (
                             <div>
-                                Sala {props.value[props.value.length - 1].room}
+                                {convertRoom(
+                                    props.value[props.value.length - 1].room
+                                )}
                             </div>
                         )
                     }
@@ -69,7 +78,9 @@ const Devices: React.FC<Props> = ({ admin, devices: devicesFromProps }) => {
                         <Link href={'/devices/' + props.id}>
                             <EyeIcon />
                         </Link>
-                        {admin && <Trash />}
+                        {admin && (
+                            <Trash onClick={() => openConfirmModal(props.id)} />
+                        )}
                     </>
                 )
             }
@@ -94,6 +105,8 @@ const Devices: React.FC<Props> = ({ admin, devices: devicesFromProps }) => {
     const [showModal, setShowModal] = useState(false)
     const [currentDevice, setCurrentDevice] = useState<Device | null>(null)
     const [loading, setLoading] = useState(false)
+    const [showConfirmModal, setShowConfirmModal] = useState(false)
+    const [deleteId, setDeleteId] = useState<GridRowId | null>(null)
 
     const { register, handleSubmit, reset } = useForm({
         defaultValues: {
@@ -147,6 +160,32 @@ const Devices: React.FC<Props> = ({ admin, devices: devicesFromProps }) => {
         }
     }, [currentDevice, reset])
 
+    const openConfirmModal = (id: GridRowId) => {
+        setDeleteId(id)
+        setShowConfirmModal(true)
+    }
+
+    const closeConfirmModal = () => {
+        setDeleteId(null)
+        setShowConfirmModal(false)
+    }
+
+    const deleteDevice = async () => {
+        try {
+            if (deleteId) {
+                setLoading(true)
+                await axios.delete('/device/' + deleteId)
+                toast.warning('Dispositivo excluído com sucesso!')
+                setLoading(false)
+                refreshDevices()
+            }
+        } catch (err: any) {
+            toast.error(err.response.data.error)
+            setLoading(false)
+        }
+        setShowConfirmModal(false)
+    }
+
     return (
         <>
             <Modal
@@ -163,6 +202,13 @@ const Devices: React.FC<Props> = ({ admin, devices: devicesFromProps }) => {
                     </Form>
                 )}
             </Modal>
+            <ConfirmModal
+                show={showConfirmModal}
+                confirmHandler={deleteDevice}
+                title="Tem certeza que deseja deletar esse dispositivo e todas as suas localizações?"
+                loading={loading}
+                closeModal={closeConfirmModal}
+            />
             <DevicesContainer>
                 <DataGrid
                     rows={devices}

@@ -22,7 +22,7 @@ ChartJS.register(
     Legend
 )
 
-const ConnectedDevices: React.FC = () => {
+const BatteryChart: React.FC = () => {
     const chartRef = useRef(null)
     const [chartData, setChartData] = useState<any>({
         datasets: []
@@ -37,7 +37,7 @@ const ConnectedDevices: React.FC = () => {
                 // maintainAspectRatio: false,
                 datasets: [
                     {
-                        label: 'Dispositivos fora do campus',
+                        label: 'Bateria abaixo de 50%',
                         data: [12, 19, 3, 5, 2, 3],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -58,7 +58,7 @@ const ConnectedDevices: React.FC = () => {
                         borderWidth: 1
                     },
                     {
-                        label: 'Dispositivos dentro do campus',
+                        label: 'Bateria acima de 50%',
                         data: [30, 35, 6, 15, 12, 30],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -90,4 +90,4 @@ const ConnectedDevices: React.FC = () => {
     )
 }
 
-export default ConnectedDevices
+export default BatteryChart

@@ -8,6 +8,10 @@ const deviceSchema = mongoose.Schema({
     name: {
         type: String,
         required: false
+    },
+    lastLocation: {
+        type: String,
+        required: false
     }
 },  { timestamps: true })
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Badge } from '../badge'
 import { Container, Item } from './style'
 import Moment from 'react-moment'
+import { convertRoom } from 'utils/room'
 
 interface Props {
     locations: Location[]
@@ -14,28 +15,33 @@ const MovementsList: React.FC<Props> = ({ locations, noDeviceName }) => {
     if (locations.length > 0) {
         items = (
             <>
-                {locations.map(location =>
-                    location.room ? (
-                        <Item key={location._id}>
-                            <Badge>
-                                <p>
-                                    <Moment format="hh:mm - DD/MM/YYYY">
-                                        {location.createdAt}
-                                    </Moment>
-                                </p>
-                            </Badge>
-                            {!noDeviceName && (
-                                <p>
-                                    {location.deviceName
-                                        ? location.deviceName
-                                        : location.deviceId}
-                                </p>
-                            )}
-                            <span>Sala {location.room}</span>
-                        </Item>
-                    ) : (
-                        <Item>Nenhuma movimentação</Item>
+                {locations ? (
+                    locations.map(
+                        location =>
+                            location.room && (
+                                <Item key={location._id}>
+                                    <Badge>
+                                        <p>
+                                            <Moment format="HH:mm - DD/MM/YYYY">
+                                                {location.createdAt}
+                                            </Moment>
+                                        </p>
+                                    </Badge>
+                                    {!noDeviceName && (
+                                        <p>
+                                            {location.deviceName
+                                                ? location.deviceName
+                                                : location.deviceId}
+                                        </p>
+                                    )}
+                                    <span>
+                                        {convertRoom(location.room)}
+                                    </span>
+                                </Item>
+                            )
                     )
+                ) : (
+                    <Item>Nenhuma movimentação</Item>
                 )}
             </>
         )

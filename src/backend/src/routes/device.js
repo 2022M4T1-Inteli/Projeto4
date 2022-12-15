@@ -11,12 +11,10 @@ router.get('/devices', authMiddleware, async (req, res) => {
         const devicesList = []
         for (let i in devices) {
             const device = devices[i].toObject()
-            const lastLocation = await Location.findOne({ deviceId: devices[i].deviceId })
-            device.room = lastLocation.room
             const locations = await Location.find({deviceId: devices[i].deviceId}, {signals: 0})
+            device.room = locations[locations.length - 1]?.room
             device.locations = locations
             devicesList.push(device)
-            // await devices[i].populate('locations').execPopulate()
         }
 
         res.send(devicesList)
@@ -29,11 +27,9 @@ router.get('/devices', authMiddleware, async (req, res) => {
 router.get('/locations', authMiddleware, async (req, res) => {
     try {
         const locations = await Location.find({room: {$ne: null}}, {signals: 0}).sort({createdAt: -1}).limit(req.query.limit).exec()
-
         const locationsList = []
         for (let i in locations) {
             const location = locations[i].toObject()
-
             const device = await Device.findOne({ deviceId: locations[i].deviceId })
             location.deviceName = device.name
             location.deviceId = device.deviceId
@@ -50,9 +46,9 @@ router.get('/device/:id', authMiddleware, async (req, res) => {
     try {
         const device = await Device.findOne({ _id: req.params.id })
         const locations = await Location.find({ deviceId: device.deviceId }, {signals: 0}).sort({createdAt: -1}).exec()
+       
         const lastLocation = locations[0].room
         const battery = locations[0].battery
-        console.log(locations[0])
         res.send({ locations, device, battery, lastLocation })
     } catch (err) {
         console.log(err)

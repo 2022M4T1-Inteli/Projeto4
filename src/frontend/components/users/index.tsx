@@ -13,6 +13,8 @@ import { toast } from 'react-toastify'
 import ConfirmModal from '../confirmModal'
 import CreateUserModal from '../createUserModal'
 import { BlueInlineBadge, GreenInlineBadge } from '../badge'
+import Moment from 'react-moment'
+
 
 interface Props {
     users: User[]
@@ -49,13 +51,29 @@ const Users: React.FC<Props> = ({ users: usersFromProps }) => {
             headerAlign: 'left'
         },
         {
+            field: 'createdAt',
+            headerName: 'Data de criação',
+            flex: 0.2,
+            align: 'left',
+            headerAlign: 'left',
+            renderCell: props => (
+                <Moment format="HH:mm - DD/MM/YYYY" >
+                    {props.value}
+                </Moment>
+            )
+        },
+        {
             field: 'admin',
             headerName: 'Cargo',
             flex: 0.2,
             align: 'center',
             headerAlign: 'center',
             renderCell: props =>
-                props.value ? <BlueInlineBadge>Admin</BlueInlineBadge> : <GreenInlineBadge>Usuário</GreenInlineBadge>
+                props.value ? (
+                    <BlueInlineBadge>Admin</BlueInlineBadge>
+                ) : (
+                    <GreenInlineBadge>Usuário</GreenInlineBadge>
+                )
         },
         {
             field: 'actions',
@@ -138,8 +156,8 @@ const Users: React.FC<Props> = ({ users: usersFromProps }) => {
                     rows={users}
                     getRowId={row => row._id}
                     columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
+                    pageSize={10}
+                    rowsPerPageOptions={[10]}
                     disableSelectionOnClick
                     components={{ Toolbar: GridToolbarQuickFilter }}
                     componentsProps={{

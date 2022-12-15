@@ -7,7 +7,7 @@ import Box from '@/components/box'
 import { Container } from '@/styles/pages/dashboard'
 import Devices from '@/components/devices'
 
-import ConnectedDevices from '@/components/connectedDevices'
+import ConnectedDevices from '@/components/batteryChart'
 import MovementsList from '@/components/movementsList'
 import { LazyMap } from '@/components/map/lazyMap'
 import axios from '../../axios'
@@ -30,7 +30,7 @@ const Home = ({ devices, locations }: Props) => {
                         <Devices devices={devices} />
                     </Box>
 
-                    <Box title="Localização dos dispositivos">
+                    <Box title="Número de dispositivos">
                         <ConnectedDevices />
                     </Box>
                     <Box titleMarginBottom title="Últimas atualizações">

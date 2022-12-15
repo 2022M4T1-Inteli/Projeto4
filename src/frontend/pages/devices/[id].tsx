@@ -19,10 +19,11 @@ import { LazyMap } from '@/components/map/lazyMap'
 import axios from '../../axios'
 import RequireAuthentication from '@/HOC/requireAuthentication'
 import { toast } from 'react-toastify'
+import { convertRoom } from 'utils/room'
 
 interface Props {
     device: Device
-    lastLocation: number
+    lastLocation: string
     battery: number
     locations: Location[]
 }
@@ -84,7 +85,7 @@ const Device = ({ device, lastLocation, battery, locations }: Props) => {
                         <LocationContainer>
                             <GoLocation />
                             {lastLocation ? (
-                                <span>Sala {lastLocation}</span>
+                                <span>{convertRoom(lastLocation)}</span>
                             ) : (
                                 <span>Nenhuma localização registrada</span>
                             )}
@@ -104,7 +105,7 @@ const Device = ({ device, lastLocation, battery, locations }: Props) => {
                         title="Mapa"
                         style={{ gridColumn: '1/4', gridRow: '2/-1' }}
                     >
-                        <LazyMap />
+                        <LazyMap rooms={[lastLocation]} />
                     </Box>
                 </Container>
             </Layout>
