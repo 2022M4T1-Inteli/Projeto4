@@ -3,10 +3,13 @@ import styled from 'styled-components'
 export const Container = styled.div`
     display: grid;
     grid-gap: 1rem;
-
 `
 
-export const Item = styled.div`
+interface ItemProps {
+    padding: boolean
+}
+
+export const Item = styled.div<ItemProps>`
     display: flex;
     grid-gap: 2rem;
     align-items: center;
@@ -14,7 +17,9 @@ export const Item = styled.div`
     justify-content: space-between;
     color: ${props => props.theme.colors.greyDark1};
     text-align: center;
-    padding: 0 4rem;
+
+    ${props => props.padding && `padding: 0 2rem;`}
+
 
     p {
         font-weight: 600;

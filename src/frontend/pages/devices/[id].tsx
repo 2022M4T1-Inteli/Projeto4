@@ -8,7 +8,8 @@ import {
     Container,
     LocationContainer,
     NoBatteryInfo,
-    PlaySoundContainer
+    PlaySoundContainer,
+    Title
 } from '@/styles/pages/device'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
@@ -46,68 +47,78 @@ const Device = ({ device, lastLocation, battery, locations }: Props) => {
                 <title>Device | {device.name}</title>
             </Head>
             <Layout>
-                <Container>
-                    <Box noMinHeight titleMarginBottom title="Nível da bateria">
-                        <BatteryBoxContainer>
-                            {battery ? (
-                                <CircularProgressbar
-                                    value={battery}
-                                    text={battery + `%`}
-                                    styles={buildStyles({
-                                        pathColor: '#285CDC',
-                                        textColor: '#285CDC',
-                                        trailColor: '#d6d6d6'
-                                    })}
-                                />
-                            ) : (
-                                <NoBatteryInfo>
-                                    Sem informações da bateria
-                                </NoBatteryInfo>
-                            )}
-                        </BatteryBoxContainer>
-                    </Box>
-                    <Box
-                        noMinHeight
-                        titleMarginBottom
-                        title="Tocar som no dispositivo"
-                    >
-                        <PlaySoundContainer>
-                            <PlaySoundButton onClick={handleBuzzer}>
-                                Tocar
-                            </PlaySoundButton>
-                        </PlaySoundContainer>
-                    </Box>
-                    <Box
-                        noMinHeight
-                        titleMarginBottom
-                        title="Última localização"
-                    >
-                        <LocationContainer>
-                            <GoLocation />
-                            {lastLocation ? (
-                                <span>{convertRoom(lastLocation)}</span>
-                            ) : (
-                                <span>Nenhuma localização registrada</span>
-                            )}
-                        </LocationContainer>
-                    </Box>
-                    <Box
-                        titleMarginBottom
-                        noMaxHeight
-                        title="Histórico de localizações"
-                        style={{ gridColumn: '4/5', gridRow: '1/-1' }}
-                    >
-                        <MovementsList noDeviceName locations={locations} />
-                    </Box>
-                    <Box
-                        noMaxHeight
-                        titleMarginBottom
-                        title="Mapa"
-                        style={{ gridColumn: '1/4', gridRow: '2/-1' }}
-                    >
-                        <LazyMap rooms={[lastLocation]} />
-                    </Box>
-                </Container>
+                <>
+                    <Title>
+                        {device.name ? device.name : 'Dispositivo sem nome'} |{' '}
+                        {device.deviceId}
+                    </Title>
+                    <Container>
+                        <Box
+                            noMinHeight
+                            titleMarginBottom
+                            title="Nível da bateria"
+                        >
+                            <BatteryBoxContainer>
+                                {battery ? (
+                                    <CircularProgressbar
+                                        value={battery}
+                                        text={battery + `%`}
+                                        styles={buildStyles({
+                                            pathColor: '#285CDC',
+                                            textColor: '#285CDC',
+                                            trailColor: '#d6d6d6'
+                                        })}
+                                    />
+                                ) : (
+                                    <NoBatteryInfo>
+                                        Sem informações da bateria
+                                    </NoBatteryInfo>
+                                )}
+                            </BatteryBoxContainer>
+                        </Box>
+                        <Box
+                            noMinHeight
+                            titleMarginBottom
+                            title="Tocar som no dispositivo"
+                        >
+                            <PlaySoundContainer>
+                                <PlaySoundButton onClick={handleBuzzer}>
+                                    Tocar
+                                </PlaySoundButton>
+                            </PlaySoundContainer>
+                        </Box>
+                        <Box
+                            noMinHeight
+                            titleMarginBottom
+                            title="Última localização"
+                        >
+                            <LocationContainer>
+                                <GoLocation />
+                                {lastLocation ? (
+                                    <span>{convertRoom(lastLocation)}</span>
+                                ) : (
+                                    <span>Nenhuma localização registrada</span>
+                                )}
+                            </LocationContainer>
+                        </Box>
+                        <Box
+                            titleMarginBottom
+                            noMaxHeight
+                            title="Histórico de localizações"
+                            style={{ gridColumn: '4/5', gridRow: '1/-1' }}
+                        >
+                            <MovementsList noDeviceName locations={locations} />
+                        </Box>
+                        <Box
+                            noMaxHeight
+                            titleMarginBottom
+                            title="Mapa"
+                            style={{ gridColumn: '1/4', gridRow: '2/-1' }}
+                        >
+                            <LazyMap rooms={[lastLocation]} />
+                        </Box>
+                    </Container>
+                </>
             </Layout>
         </>
     )

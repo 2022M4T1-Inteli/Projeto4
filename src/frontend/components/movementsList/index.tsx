@@ -10,7 +10,7 @@ interface Props {
 }
 
 const MovementsList: React.FC<Props> = ({ locations, noDeviceName }) => {
-    let items = <Item>Sem atualizações</Item>
+    let items = <Item padding>Sem atualizações</Item>
 
     if (locations.length > 0) {
         items = (
@@ -19,7 +19,7 @@ const MovementsList: React.FC<Props> = ({ locations, noDeviceName }) => {
                     locations.map(
                         location =>
                             location.room && (
-                                <Item key={location._id}>
+                                <Item padding={!noDeviceName} key={location._id}>
                                     <Badge>
                                         <p>
                                             <Moment format="HH:mm - DD/MM/YYYY">
@@ -41,7 +41,7 @@ const MovementsList: React.FC<Props> = ({ locations, noDeviceName }) => {
                             )
                     )
                 ) : (
-                    <Item>Nenhuma movimentação</Item>
+                    <Item padding>Nenhuma movimentação</Item>
                 )}
             </>
         )
