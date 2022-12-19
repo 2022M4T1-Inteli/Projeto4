@@ -40,7 +40,7 @@ Wifi.h, PubSubClient.h, WiFiClientSecure.h, MQTT
 
 
 
-## 📁 Estrutura de pastas
+## Estrutura de pastas
 
 
 |--> documentos<br>
@@ -63,7 +63,7 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 - <b>src</b>: todo o código fonte criado para o desenvolvimento do projeto, incluindo os blocos de código do circuito, backend e frontend se aplicáveis.
 
-## 💻 Execução do projeto
+## Execução do projeto
 
 Um guia para a execução desse projeto pode ser encontrado no conteúdo do documento "Manual de Instruções", dentro da pasta "documentos".
 
@@ -79,7 +79,7 @@ Na pasta frontend, deve existir um arquivo com o nome .env.local com as variáve
 Na pasta backend, deve existir um arquivo com o nome .env também com as váriaveis de ambiente necessárias para a execução do servidor. <br/> <br/>
 
 
-## 💻 Configuração para Desenvolvimento
+## Configuração para Desenvolvimento
 
 ### .env Frontend
   
@@ -111,7 +111,7 @@ Depois, é só entrar no endereço <a href="http://localhost:3000/login">http://
 
 
 
-## 📋 Licença/License
+## Licença/License
 
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1">
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1">
